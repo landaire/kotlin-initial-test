@@ -3,6 +3,8 @@
  */
 package test
 
+import java.util.Random
+
 class Customer(val name: String, val email: String, val id: Int) : Comparable<Customer> {
     override fun compareTo(other: Customer): Int {
         return this.id - id
@@ -15,8 +17,12 @@ class Customer(val name: String, val email: String, val id: Int) : Comparable<Cu
 
 fun main(args : Array<String>) {
     val linkedList = LinkedList<Customer>()
-    linkedList.add(Customer("Testing", "test@test.com", 123))
-    linkedList.add(Customer("Testing 2", "Testing2@testing2.com", 321))
+
+    val rand = Random(System.currentTimeMillis())
+
+    for (i in 1..30) {
+        linkedList.add(Customer("Testing $i", "test@test$i.com", rand.nextInt()))
+    }
 
     for (customer in linkedList) {
         println(customer)
