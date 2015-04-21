@@ -6,9 +6,8 @@ package test
 import java.util.Random
 
 class Customer(val name: String, val email: String, val id: Int) : Comparable<Customer> {
-    override fun compareTo(other: Customer): Int {
-        return this.id - id
-    }
+    
+    override fun compareTo(other: Customer): Int = this.id - id
 
     override fun toString(): String {
         return "$id: $name -- $email"
