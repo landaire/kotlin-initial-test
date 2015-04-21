@@ -7,14 +7,14 @@ package test
 class LinkedList<T : Comparable<T>> : MutableIterable<T> {
     inner private data class Node(val data: T?, var prev: Node?, var next: Node?)
 
-    inner class LinkedListIterator(var current: Node, var head: Node, val list: LinkedList<T>) : MutableIterator<T> {
+    inner class LinkedListIterator(var current: Node, var head: Node, val removeItem: (data: T) -> Unit) : MutableIterator<T> {
         override fun next(): T {
             current = current.next!!
             return current.data!!
         }
 
         override fun remove() {
-            list.remove(current.data!!)
+            removeItem(current.data!!)
             current = current.next!!
         }
 
@@ -38,7 +38,7 @@ class LinkedList<T : Comparable<T>> : MutableIterable<T> {
         size++
     }
 
-    fun remove(data: T) {
+    fun remove(data: T): Unit {
         val node = nodeForData(data)
 
         if (node != null) {
@@ -53,7 +53,7 @@ class LinkedList<T : Comparable<T>> : MutableIterable<T> {
     }
 
     override fun iterator(): MutableIterator<T> {
-        return LinkedListIterator(head, head, this)
+        return LinkedListIterator(head, head, {data -> remove(data)})
     }
 
     private fun nodeForData(data: T): Node? {
