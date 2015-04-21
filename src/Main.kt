@@ -6,7 +6,7 @@ package test
 import java.util.Random
 
 class Customer(val name: String, val email: String, val id: Int) : Comparable<Customer> {
-    
+
     override fun compareTo(other: Customer): Int = this.id - id
 
     override fun toString(): String {
@@ -26,4 +26,12 @@ fun main(args : Array<String>) {
     for (customer in linkedList) {
         println(customer)
     }
+
+    println("\nTesting filtering on name == \"Testing 1\"")
+
+    val result = linkedList filter { customer ->
+        customer.name == "Testing 1"
+    }
+
+    println(result)
 }
