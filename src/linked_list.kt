@@ -4,8 +4,10 @@
 
 package test
 
+import java.util.ArrayList
+
 class LinkedList<T : Comparable<T>> : MutableIterable<T> {
-    inner private data class Node(val data: T?, var prev: Node?, var next: Node?)
+    inner private data class Node(var data: T?, var prev: Node?, var next: Node?)
 
     inner class LinkedListIterator(var current: Node, var head: Node, val removeItem: (data: T) -> Unit) : MutableIterator<T> {
         override fun next(): T {
@@ -48,8 +50,12 @@ class LinkedList<T : Comparable<T>> : MutableIterable<T> {
         }
     }
 
-    fun exists(data: T): Boolean {
-        return nodeForData(data) == null
+    fun size(): Int {
+        return size
+    }
+
+    fun isEmpty(): Boolean {
+        return size == 0
     }
 
     override fun iterator(): MutableIterator<T> {

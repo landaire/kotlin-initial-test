@@ -3,6 +3,7 @@
  */
 package test
 
+import java.util.Collections
 import java.util.Random
 
 class Customer(val name: String, val email: String, val id: Int) : Comparable<Customer> {
@@ -22,6 +23,8 @@ fun main(args : Array<String>) {
     for (i in 1..30) {
         linkedList.add(Customer("Testing $i", "test@test$i.com", rand.nextInt()))
     }
+
+    println("Unsorted")
 
     for (customer in linkedList) {
         println(customer)
